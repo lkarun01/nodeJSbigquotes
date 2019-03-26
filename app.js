@@ -24,6 +24,9 @@ const quotes = require("./routes/quotes");
 // Load keys
 const keys = require("./config/keys");
 
+// Handle bars Helpers
+const { truncate, stripTags} = require('./helpers/hbs');
+
 // Mongoose connect
 mongoose
   .connect(keys.mongoURI, { useNewUrlParser: true })
@@ -46,6 +49,10 @@ app.use(bodyParser.json());
 app.engine(
   "handlebars",
   exphbs({
+    helpers:{
+      truncate:truncate,
+      stripTags:stripTags
+    },
     defaultLayout: "main"
   })
 );
