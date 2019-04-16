@@ -1,0 +1,32 @@
+<h1>Welcome {{user.firstName}}</h1>
+<h4>Your Quotes</h4>
+
+{{#if quotes}}
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each quotes}}
+        <tr>
+            <td> <a href="/quotes/show/{{id}}">{{title}}</a></td>
+            <td>{{formatDate date 'MMMM Do YYYY'}}</td>
+            <td><span class="dash-status">{{status}}</span></td>
+            <td><a class="btn left-align" href="/quotes/edit/{{id}}"><i class="far fa-edit"></i> Edit</a>
+                <form action="/quotes/{{id}}?_method=DELETE" method="POST" id="delete-form">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn red"><i class="far fa-trash-alt"></i> Delete</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<p>You have not created any quotes yet.</p>
+{{/if}}
